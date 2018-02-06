@@ -6,7 +6,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>wechar</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>wechar</name>
 	<description>一个微信公众号开发</description>
@@ -28,8 +28,21 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<!--去掉springboot自带的tomcat,因为百度的bae自带有tomcat-->
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-
+		<!--添加外部tomcat依赖-->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-servlet-api</artifactId>
+			<version>8.0.36</version>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -56,6 +69,7 @@
 	</dependencies>
 
 	<build>
+        <finalName>shixian</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
