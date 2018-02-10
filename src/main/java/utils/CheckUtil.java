@@ -1,4 +1,4 @@
-package Utils;
+package utils;
 
 import java.security.MessageDigest;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import java.util.Arrays;
  */
 public class CheckUtil {
 
-    private static final String token = "iotzzg";
+    private static final String token = "zzgtest";
     public static boolean checkSignature(String signature,String timestamp,String nonce){
         String[] arr = new String[]{token,timestamp,nonce};
         //排序

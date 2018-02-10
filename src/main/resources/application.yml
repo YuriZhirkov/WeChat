@@ -1,2 +1,13 @@
 server:
   port: 8080
+
+spring:
+  mvc:
+    static-path-pattern: /**
+  resources:
+    #配置静态路径，多个可用逗号隔开
+    static-locations: file:${img.location}
+
+#文件基础路径
+img:
+  location: C:/data/

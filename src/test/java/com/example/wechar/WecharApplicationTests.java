@@ -1,9 +1,11 @@
 package com.example.wechar;
 
+import com.example.wechar.model.AccessToken;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import utils.WeixinUtil;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -11,6 +13,32 @@ public class WecharApplicationTests {
 
 	@Test
 	public void contextLoads() {
+	}
+
+	@Test
+	public void testWeChar(){
+		try {
+			//这个是用来获取token的测试代码
+			AccessToken token = WeixinUtil.getAccessToken();
+			System.out.println("票据"+token.getToken());
+			System.out.println("有效时间"+token.getExpiresIn());
+
+
+			//这是用来测试上传图片的
+//			String path = "C:/data/hashiqi.jpg";
+//			String mediaId = WeixinUtil.upload(path, token.getToken(), "image");
+//			System.out.println(mediaId);
+			//这是用来测试上传音乐图片的
+			String path = "C:/data/hashiqi.jpg";
+			String mediaId = WeixinUtil.upload(path, token.getToken(), "thumb");
+			System.out.println(mediaId);
+
+//			String result = WeixinUtil.translate("my name is laobi");
+			//String result = WeixinUtil.translateFull("");
+//			System.out.println(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

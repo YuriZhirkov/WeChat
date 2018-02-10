@@ -1,12 +1,10 @@
 package com.example.wechar;
 
-import Utils.CheckUtil;
-import Utils.MessageUtil;
-import com.example.wechar.model.TextMessage;
+import utils.CheckUtil;
+import utils.MessageUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.Map;
 
 /**
@@ -50,8 +48,15 @@ public class CheckOutController {
                   if ("1".equals(content)) {
                       s = MessageUtil.initText(toUserName,fromUserName,MessageUtil.firstMenu());
                   } else if ("2".equals(content)) {
-                      s = MessageUtil.initText(toUserName,fromUserName,MessageUtil.secondMenu());
-                  } else if ("?".equals(content) || "？".equals(content)) {
+//                      s = MessageUtil.initText(toUserName,fromUserName,MessageUtil.secondMenu());
+                      s = MessageUtil.initNewsMessage(toUserName,fromUserName);
+                  } else if ("3".equals(content)) {
+//                      s = MessageUtil.initText(toUserName,fromUserName,MessageUtil.secondMenu());
+                      s = MessageUtil.initImageMessage(toUserName,fromUserName);
+                  }else if ("4".equals(content)) {
+//                      s = MessageUtil.initText(toUserName,fromUserName,MessageUtil.secondMenu());
+                      s = MessageUtil.initMusicMessage(toUserName,fromUserName);
+                  }else if ("?".equals(content) || "？".equals(content)) {
                       s = MessageUtil.initText(toUserName,fromUserName,MessageUtil.menuText());
                   }
 //                 TextMessage textMessage = new TextMessage();
