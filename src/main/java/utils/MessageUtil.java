@@ -27,6 +27,8 @@ public class MessageUtil {
     public static final String MESSAGE_UNSUBSCRIBE = "unsubscribe";
     public static final String MESSAGE_CLICK = "CLICK";
     public static final String MESSAGE_VIEW = "VIEW";
+    public static final String MESSAGE_SCANCODE= "scancode_push";
+    public static final String MESSAGE_EVNET = "event";
 
 
     /**
@@ -168,7 +170,7 @@ public class MessageUtil {
     public static String initImageMessage(String toUserName,String fromUserName){
         String message = null;
         Image image = new Image();
-        image.setMediaId("sqpxzYVaABM9B055sf4kawaw4sen8Rk9p7cm4AxAFU4Fmn7IZ99Re1zpZnCPSWkS");
+        image.setMediaId("CxbMh5LIoEMQmUn_5H0QZS4jfd9GxdmIeROVM_0tms-5voWqsLoD6O2ko7BtsJNp");
         ImageMessage imageMessage = new ImageMessage();
         imageMessage.setFromUserName(toUserName);
         imageMessage.setToUserName(fromUserName);

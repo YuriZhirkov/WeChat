@@ -66,14 +66,25 @@ public class CheckOutController {
 //                 textMessage.setCreateTime(new Date().getTime());
 //                 textMessage.setContent("您发送的消息为:"+content);
 //                 s = MessageUtil.textMessageToXml(textMessage);
-             } else if (MessageUtil.MESSAGE_EVENT.equals(msgType)){
-                String evenType = map.get("Event");
-                if (MessageUtil.MESSAGE_SUBSCRIBE.equals(evenType)){
-                    s = MessageUtil.initText(toUserName,fromUserName,MessageUtil.menuText());
+            }else if(MessageUtil.MESSAGE_EVNET.equals(msgType)){
+                String eventType = map.get("Event");
+                if(MessageUtil.MESSAGE_SUBSCRIBE.equals(eventType)){
+                    s = MessageUtil.initText(toUserName, fromUserName, MessageUtil.menuText());
+                }else if(MessageUtil.MESSAGE_CLICK.equals(eventType)){
+                    s = MessageUtil.initText(toUserName, fromUserName, MessageUtil.menuText());
+                }else if(MessageUtil.MESSAGE_VIEW.equals(eventType)){
+                    String url = map.get("EventKey");
+                    s = MessageUtil.initText(toUserName, fromUserName, url);
+                }else if(MessageUtil.MESSAGE_SCANCODE.equals(eventType)){
+                    String key = map.get("EventKey");
+                    s = MessageUtil.initText(toUserName, fromUserName, key);
                 }
+            }else if(MessageUtil.MESSAGE_LOCATION.equals(msgType)){
+                String label = map.get("Label");
+                s = MessageUtil.initText(toUserName, fromUserName, label);
             }
             System.out.println(s);
-            return s;
+            return s; 
         } catch (Exception e) {
             e.printStackTrace();
         }

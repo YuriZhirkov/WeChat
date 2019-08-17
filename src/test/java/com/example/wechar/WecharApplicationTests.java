@@ -1,6 +1,8 @@
 package com.example.wechar;
 
 import com.example.wechar.model.AccessToken;
+import net.sf.json.JSON;
+import net.sf.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,10 +31,18 @@ public class WecharApplicationTests {
 //			String mediaId = WeixinUtil.upload(path, token.getToken(), "image");
 //			System.out.println(mediaId);
 			//这是用来测试上传音乐图片的
-			String path = "C:/data/hashiqi.jpg";
-			String mediaId = WeixinUtil.upload(path, token.getToken(), "thumb");
-			System.out.println(mediaId);
+//			String path = "C:/data/hashiqi.jpg";
+//			String mediaId = WeixinUtil.upload(path, token.getToken(), "thumb");
+//			System.out.println(mediaId);
 
+			//创建菜单的测试
+			String menu = JSONObject.fromObject(WeixinUtil.initMenu()).toString();
+			int result = WeixinUtil.createMenu(token.getToken(),menu);
+			if (result == 0){
+				System.out.println("创建菜单成功");
+			} else {
+				System.out.println("创建菜单失败");
+			}
 //			String result = WeixinUtil.translate("my name is laobi");
 			//String result = WeixinUtil.translateFull("");
 //			System.out.println(result);
