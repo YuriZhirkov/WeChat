@@ -30,8 +30,11 @@ import org.apache.http.util.EntityUtils;
  *
  */
 public class WeixinUtil {
-	private static final String APPID = "wx8e82285280002d1b";
-	private static final String APPSECRET = "329268b7ee32a459487e82073978b4c4";
+	//AppID wx3c158b6246f56fbd
+	private static final String APPID = "wx3c158b6246f56fbd";
+
+	//AppSecret  cb1f46b5c994ad17b9805b1b7b6b75ef
+	private static final String APPSECRET = "cb1f46b5c994ad17b9805b1b7b6b75ef";
 
 	private static final String ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
 
