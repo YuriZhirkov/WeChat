@@ -13,10 +13,10 @@ import org.apache.http.util.EntityUtils;
 public class AuthUtil {
 
     //AppID wx3c158b6246f56fbd
-    private static final String APPID = "wx3c158b6246f56fbd";
+    public static final String APPID = "wx3c158b6246f56fbd";
 
     //AppSecret  cb1f46b5c994ad17b9805b1b7b6b75ef
-    private static final String APPSECRET = "cb1f46b5c994ad17b9805b1b7b6b75ef";
+    public static final String APPSECRET = "cb1f46b5c994ad17b9805b1b7b6b75ef";
 
     public static JSONObject doGetStr(String url) throws Exception{
         JSONObject jsonObject = null;
