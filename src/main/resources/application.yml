@@ -1,13 +1,24 @@
 server:
   port: 8080
+  context-path: /
 
 spring:
   mvc:
-    static-path-pattern: /**
+    static-path-pattern:  /*
+    view:
+      prefix: classpath:/templates/
+      suffix: .html
   resources:
-    #配置静态路径，多个可用逗号隔开
-    static-locations: file:${img.location}
+#    #配置静态路径，多个可用逗号隔开
+    static-locations: classpath:/resources/,classpath:/static/,file:${img.location}
+    #html具有缓存的特点,这里不用,每次刷新都请求服务器
+  thymeleaf:
+    cache: false
+    content-type: text/html
+    encoding: UTF-8
+    mode: HTML5
+
 
 #文件基础路径
 img:
-  location: C:/data/
+  location: D:/data/
