@@ -1,20 +1,24 @@
 package com.example.wechar;
 
 import net.sf.json.JSONObject;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import utils.AuthUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URLEncoder;
 
 /**
  * Created by zzg on 2019/8/19.
  */
-@RestController
+@Controller
 @RequestMapping(value = "/wxAuth")
 public class LoginController {
 
@@ -34,7 +38,7 @@ public class LoginController {
     }
 
     @GetMapping(value = "/callBack")
-    public  void callBack(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public String callBack(HttpServletRequest req,HttpServletResponse resp,Model model) throws Exception {
         String code = req.getParameter("code");
         System.out.println("code="+code);
         StringBuffer urlBuffer = new StringBuffer();
@@ -47,7 +51,7 @@ public class LoginController {
         System.out.println("url="+url);
         JSONObject jsonObject = AuthUtil.doGetStr(url);
         String openId = jsonObject.getString("openid");
-        String token = jsonObject.getString("token");
+        String token = jsonObject.getString("access_token");
         System.out.println("openId="+openId);
         System.out.println("token="+token);
         StringBuffer infoBuffer = new StringBuffer();
@@ -59,6 +63,16 @@ public class LoginController {
         JSONObject userInfo = AuthUtil.doGetStr(infoUrl);
         //获取用户信息
         System.out.println(userInfo);
+        //1. 使用微信用户信息直接登录,无需注册和绑定
+        String nickname = userInfo.getString("nickname");
+        int sex = userInfo.getInt("sex");
+        String city = userInfo.getString("city");
+        String headimgurl = userInfo.getString("headimgurl");
+        model.addAttribute("nickname",nickname);
+        model.addAttribute("sex",sex);
+        model.addAttribute("city",city);
+        model.addAttribute("headimgurl",headimgurl);
+        return "userInfo";
     }
 
 }

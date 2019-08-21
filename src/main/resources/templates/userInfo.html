@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+      <div style="text-align: center;">
+          登录成功
+      </div>
+      <div style="text-align: center;">
+          <span>用户昵称:</span><label  style="color:red;"><input type="text" th:value="${nickname}"></label><br>
+          <span>用户性别:</span><label  style="color:red;"><input type="text" th:value="${sex}"></label><br>
+          <span>用户城市:</span><label  style="color:red;"><input type="text" th:value="${city}"></label><br>
+          <span>用户昵称:</span><label  style="color:red;"><input type="text" th:value="${nickname}"></label><br>
+          <img th:src="${headimgurl}"  alt="用户头像" />
+      </div>
+
+
+</body>
+</html>

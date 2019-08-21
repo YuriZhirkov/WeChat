@@ -22,8 +22,8 @@ public class WecharApplicationTests {
 		try {
 			//这个是用来获取token的测试代码
 			AccessToken token = WeixinUtil.getAccessToken();
-			System.out.println("票据"+token.getToken());
-			System.out.println("有效时间"+token.getExpiresIn());
+			System.out.println("票据: "+token.getToken());
+			System.out.println("有效时间: "+token.getExpiresIn());
 
 
 			//这是用来测试上传图片的
@@ -36,13 +36,13 @@ public class WecharApplicationTests {
 //			System.out.println(mediaId);
 
 			//创建菜单的测试
-			String menu = JSONObject.fromObject(WeixinUtil.initMenu()).toString();
-			int result = WeixinUtil.createMenu(token.getToken(),menu);
-			if (result == 0){
-				System.out.println("创建菜单成功");
-			} else {
-				System.out.println("创建菜单失败");
-			}
+//			String menu = JSONObject.fromObject(WeixinUtil.initMenu()).toString();
+//			int result = WeixinUtil.createMenu(token.getToken(),menu);
+//			if (result == 0){
+//				System.out.println("创建菜单成功");
+//			} else {
+//				System.out.println("创建菜单失败");
+//			}
 //			String result = WeixinUtil.translate("my name is laobi");
 			//String result = WeixinUtil.translateFull("");
 //			System.out.println(result);
