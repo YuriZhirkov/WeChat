@@ -16,7 +16,7 @@ public class AuthUtil {
     public static final String APPID = "wx3c158b6246f56fbd";
 
     //AppSecret  cb1f46b5c994ad17b9805b1b7b6b75ef
-    public static final String APPSECRET = "cb1f46b5c994ad17b9805b1b7b6b75ef";
+    public static final String APPSECRET = "f37bf7ac9af48fc73ee26937f06ab387";
 
     public static JSONObject doGetStr(String url) throws Exception{
         JSONObject jsonObject = null;
