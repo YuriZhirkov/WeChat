@@ -33,8 +33,8 @@ public class WeixinUtil {
 	//AppID wx3c158b6246f56fbd
 	private static final String APPID = "wx3c158b6246f56fbd";
 
-	//AppSecret  cb1f46b5c994ad17b9805b1b7b6b75ef
-	private static final String APPSECRET = "cb1f46b5c994ad17b9805b1b7b6b75ef";
+	//AppSecret  c05671fddf719606059059205ba1356d
+	private static final String APPSECRET = "c05671fddf719606059059205ba1356d";
 
 	private static final String ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
 

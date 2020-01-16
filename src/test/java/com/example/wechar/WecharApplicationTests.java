@@ -1,10 +1,12 @@
 package com.example.wechar;
 
 import com.example.wechar.model.AccessToken;
+import com.example.wechar.service.TemplateMsgService;
 import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import utils.WeixinUtil;
@@ -12,6 +14,9 @@ import utils.WeixinUtil;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class WecharApplicationTests {
+
+	@Autowired
+	TemplateMsgService templateMsgService;
 
 	@Test
 	public void contextLoads() {
@@ -51,4 +56,10 @@ public class WecharApplicationTests {
 		}
 	}
 
+	@Test
+	public void  getTemplateId(){
+		String templateIdShort = "OPENTM413887043";
+		String templateId = templateMsgService.getTemplateId(templateIdShort);
+		System.out.println("templateId="+templateId);
+	}
 }
