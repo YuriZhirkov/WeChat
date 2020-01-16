@@ -82,16 +82,47 @@ public class MessageUtil {
         return textMessageToXml(text);
     }
     /**
-     * 主菜单
+     * 主菜单"?"
      *
      * @return
      */
-    public static String menuText() {
+    public static String menuTextWen() {
         StringBuffer sb = new StringBuffer();
         sb.append("欢迎你的关注，请按照菜单提示操作：\n\n");
         sb.append("1、课程介绍\n");
         sb.append("2、慕课网介绍\n");
         sb.append("回复？调出此菜单。");
+        sb.append("?");
+        return sb.toString();
+    }
+
+    /**
+     * 主菜单MESSAGE_SUBSCRIBE
+     *
+     * @return
+     */
+    public static String menuTextSUBSCRIBE() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("欢迎你的关注，请按照菜单提示操作：\n\n");
+        sb.append("1、课程介绍\n");
+        sb.append("2、慕课网介绍\n");
+        sb.append("回复？调出此菜单。");
+        sb.append("MESSAGE_SUBSCRIBE");
+        return sb.toString();
+    }
+
+    /**
+     * 主菜单MESSAGE_CLICK
+     *
+     * @return
+     */
+    public static String menuTextCLICK() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("欢迎你的关注，请按照菜单提示操作：\n\n");
+        sb.append("1、课程介绍\n");
+        sb.append("2、慕课网介绍\n");
+        sb.append("回复？调出此菜单。");
+        sb.append("MESSAGE_CLICK");
         return sb.toString();
     }
 

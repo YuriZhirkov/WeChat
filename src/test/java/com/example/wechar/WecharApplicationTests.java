@@ -66,6 +66,7 @@ public class WecharApplicationTests {
 	}
 
     /**
+     * 给指定的用户发送模板消息
      * 0UvpP1wFp-gvLVGc8XxkxMn30TLjNueyiSlqftPiugU 	报名成功通知	OPENTM413887043
      */
 	@Test
@@ -91,6 +92,7 @@ public class WecharApplicationTests {
 
 
     /**
+     * 给指定的用户发送模板消息
      * 9iIMCN9ZgufKDdmR_FaHiva2qud2LctUpEAS5rK8QhI	 预约成功提醒	OPENTM207344049
      */
     @Test
@@ -116,6 +118,7 @@ public class WecharApplicationTests {
 
 
     /**
+     * 给指定的用户发送模板消息
      * ThLieLG1DEYrox_fteIl0OFEKeFq9YSOPcrhxdPztvY		审核结果通知		OPENTM411367272
      */
     @Test

@@ -57,7 +57,7 @@ public class CheckOutController {
 //                      s = MessageUtil.initText(toUserName,fromUserName,MessageUtil.secondMenu());
                       s = MessageUtil.initMusicMessage(toUserName,fromUserName);
                   }else if ("?".equals(content) || "？".equals(content)) {
-                      s = MessageUtil.initText(toUserName,fromUserName,MessageUtil.menuText());
+                      s = MessageUtil.initText(toUserName,fromUserName,MessageUtil.menuTextWen());
                   }
 //                 TextMessage textMessage = new TextMessage();
 //                 textMessage.setToUserName(fromUserName);
@@ -69,9 +69,13 @@ public class CheckOutController {
             }else if(MessageUtil.MESSAGE_EVNET.equals(msgType)){
                 String eventType = map.get("Event");
                 if(MessageUtil.MESSAGE_SUBSCRIBE.equals(eventType)){
-                    s = MessageUtil.initText(toUserName, fromUserName, MessageUtil.menuText());
+                    // 用户关注公众号之后,自动发送的信息
+
+                    s = MessageUtil.initText(toUserName, fromUserName, MessageUtil.menuTextSUBSCRIBE());
+
+
                 }else if(MessageUtil.MESSAGE_CLICK.equals(eventType)){
-                    s = MessageUtil.initText(toUserName, fromUserName, MessageUtil.menuText());
+                    s = MessageUtil.initText(toUserName, fromUserName, MessageUtil.menuTextCLICK());
                 }else if(MessageUtil.MESSAGE_VIEW.equals(eventType)){
                     String url = map.get("EventKey");
                     s = MessageUtil.initText(toUserName, fromUserName, url);
