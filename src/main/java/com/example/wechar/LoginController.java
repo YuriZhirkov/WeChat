@@ -21,7 +21,7 @@ public class LoginController {
 
     @GetMapping(value = "/wxLogin")
     public  void wxLogin(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String backUrl = "http://ygtqzh.natapp1.cc/wxAuth/callBack";
+        String backUrl = "http://zhangzhig.natapp1.cc/wxAuth/callBack";
         StringBuffer urlBuffer = new StringBuffer();
         urlBuffer.append("https://open.weixin.qq.com/connect/oauth2/authorize?appid=");
         urlBuffer.append(AuthUtil.APPID).append("&");
