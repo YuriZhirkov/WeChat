@@ -22,6 +22,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.springframework.util.StringUtils;
 
 
 /**
@@ -195,10 +196,19 @@ public class WeixinUtil {
 		JSONObject jsonObject = doGetStr(url);
 		System.out.println("jsonObject = "+JsonUtils.objectToJson(jsonObject));
 		if(jsonObject!=null){
-			token.setToken(jsonObject.getString("access_token"));
-			token.setExpiresIn(jsonObject.getInt("expires_in"));
+			if (!jsonObject.containsKey("errmsg")) {
+				token.setToken(jsonObject.getString("access_token"));
+				token.setExpiresIn(jsonObject.getInt("expires_in"));
+			} else {
+				token.setErrmsg(jsonObject.getString("errmsg"));
+				token.setErrcode(jsonObject.getInt("errcode"));
+			}
+			return token;
+
+		} else {
+			return null;
 		}
-		return token;
+
 	}
 
 	/**

@@ -3,6 +3,7 @@ package com.example.wechar.service;
 import com.alibaba.fastjson.JSONObject;
 import com.example.wechar.model.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import utils.AuthUtil;
 import utils.JsonUtils;
 import utils.WeixinUtil;
@@ -26,6 +27,13 @@ public class TemplateMsgService {
         //先获取ACCESS_TOKEN
         try {
             AccessToken token = WeixinUtil.getAccessToken();
+            if (token == null || StringUtils.isEmpty(token.getToken())) {
+                String msg = "02-获取access_token异常:";
+                if (!StringUtils.isEmpty(token.getErrmsg())) {
+                    msg=msg+token.getErrmsg();
+                }
+                return msg;
+            }
             System.out.println("票据: "+token.getToken());
             System.out.println("有效时间: "+token.getExpiresIn());
             String url = "https://api.weixin.qq.com/cgi-bin/template/api_add_template?access_token="+token.getToken();
@@ -85,6 +93,13 @@ public class TemplateMsgService {
 
         try {
             AccessToken token = WeixinUtil.getAccessToken();
+            if (token == null || StringUtils.isEmpty(token.getToken())) {
+                String msg = "02-获取access_token异常:";
+                if (!StringUtils.isEmpty(token.getErrmsg())) {
+                    msg=msg+token.getErrmsg();
+                }
+                return msg;
+            }
             System.out.println("票据: "+token.getToken());
             System.out.println("有效时间: "+token.getExpiresIn());
             String url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="+token.getToken();
@@ -94,7 +109,11 @@ public class TemplateMsgService {
             String s = AuthUtil.doPost(url, JsonUtils.objectToJson(messageTemplateSend));
             System.out.println("获取消息模板的返回值:"+s);
             com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(s);
-            return jsonObject.getString("msgid");
+            if (jsonObject.containsKey("errmsg") && jsonObject.getString("errmsg").equals("ok")) {
+                return  "00-发送消息模板成功";
+            } else {
+                return  "03-发送消息模板失败:"+jsonObject.getString("errmsg");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return "01-获取消息模板失败"+e.getMessage();
