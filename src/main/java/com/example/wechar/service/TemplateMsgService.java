@@ -1,6 +1,6 @@
 package com.example.wechar.service;
 
-import com.alibaba.fastjson.JSONObject;
+import net.sf.json.JSONObject;
 import com.example.wechar.model.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -41,10 +41,22 @@ public class TemplateMsgService {
             //GetTemplateIdInput getTemplateIdInput = new GetTemplateIdInput("OPENTM413887043");
             GetTemplateIdInput getTemplateIdInput = new GetTemplateIdInput(templateIdShort);
 
-            String s = AuthUtil.doPost(url, JsonUtils.objectToJson(getTemplateIdInput));
-            System.out.println("获取消息模板的返回值:"+s);
-            JSONObject jsonObject = JSONObject.parseObject(s);
-            return jsonObject.getString("template_id");
+            JSONObject jsonObject = AuthUtil.doPost(url, JsonUtils.objectToJson(getTemplateIdInput));
+            System.out.println("获取消息模板="+JsonUtils.objectToJson(jsonObject));
+
+            if (jsonObject!=null) {
+                if (jsonObject.containsKey("errmsg") && jsonObject.getString("errmsg").equals("ok")) {
+                    return "00-获取消息模板id为:"+jsonObject.getString("template_id");
+                } else {
+                    if (jsonObject.containsKey("errmsg")){
+                        return "03-获取消息模板失败:"+jsonObject.getString("errmsg");
+                    } else {
+                        return "03-获取消息模板失败";
+                    }
+                }
+            } else {
+                return "04-获取消息模板失败";
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return "01-获取消息模板失败"+e.getMessage();
@@ -105,18 +117,26 @@ public class TemplateMsgService {
             String url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="+token.getToken();
 
 
+            JSONObject jsonObject = AuthUtil.doPost(url, JsonUtils.objectToJson(messageTemplateSend));
+            System.out.println("获取模板消息的返回值:"+JsonUtils.objectToJson(jsonObject));
+            if (jsonObject != null) {
+                if (jsonObject.containsKey("errmsg") && jsonObject.getString("errmsg").equals("ok")) {
+                    return  "00-发送模板消息成功";
+                } else {
+                    if (jsonObject.containsKey("errmsg")) {
+                        return  "03-发送模板消息失败:"+jsonObject.getString("errmsg");
+                    } else {
+                        return  "03-发送模板消息失败";
+                    }
 
-            String s = AuthUtil.doPost(url, JsonUtils.objectToJson(messageTemplateSend));
-            System.out.println("获取消息模板的返回值:"+s);
-            com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(s);
-            if (jsonObject.containsKey("errmsg") && jsonObject.getString("errmsg").equals("ok")) {
-                return  "00-发送消息模板成功";
+                }
             } else {
-                return  "03-发送消息模板失败:"+jsonObject.getString("errmsg");
+                return  "03-发送模板消息失败";
             }
+
         } catch (Exception e) {
             e.printStackTrace();
-            return "01-获取消息模板失败"+e.getMessage();
+            return "01-获取模板消息失败"+e.getMessage();
         }
     }
 

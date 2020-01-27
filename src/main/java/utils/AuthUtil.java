@@ -2,18 +2,14 @@ package utils;
 
 import net.sf.json.JSONObject;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-
-import java.io.IOException;
 
 /**
  * Created by zzg on 2019/8/19.
@@ -40,22 +36,20 @@ public class AuthUtil {
         return jsonObject;
     }
 
-    public static String doPost(String url, String params) {
+    public static JSONObject doPost(String url, String params) throws Exception {
         DefaultHttpClient httpClient = new DefaultHttpClient();
-        HttpRequest request = new HttpPost(url);
-
+        HttpPost request = new HttpPost(url);
+        JSONObject jsonObject = null;
         CloseableHttpResponse response = null;
-
-        try {
-            HttpPost httpPost = (HttpPost) request;
-            httpPost.setEntity(new StringEntity(params, ContentType.create("application/json", "UTF-8")));
-            response = httpClient.execute(httpPost);
-            if (response != null && response.getStatusLine() != null && response.getStatusLine().getStatusCode() == 200) {
-                return EntityUtils.toString(response.getEntity());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        request.setEntity(new StringEntity(params, ContentType.create("application/json", "UTF-8")));
+        response = httpClient.execute(request);
+        if (response != null && response.getStatusLine() != null && response.getStatusLine().getStatusCode() == 200) {
+            String result = EntityUtils.toString(response.getEntity());
+            jsonObject = JSONObject.fromObject(result);
+            return jsonObject;
+        } else {
+            return null;
         }
-        return null;
+
     }
 }

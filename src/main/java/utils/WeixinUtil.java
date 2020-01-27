@@ -46,44 +46,8 @@ public class WeixinUtil {
 	private static final String QUERY_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=ACCESS_TOKEN";
 
 	private static final String DELETE_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=ACCESS_TOKEN";
-	/**
-	 * get请求
-	 * @param url
-	 * @return
-	 * @throws ParseException
-	 * @throws IOException
-	 */
-	public static JSONObject doGetStr(String url) throws Exception{
-		DefaultHttpClient client = new DefaultHttpClient();
-		HttpGet httpGet = new HttpGet(url);
-		JSONObject jsonObject = null;
-		HttpResponse httpResponse = client.execute(httpGet);
-		HttpEntity entity = httpResponse.getEntity();
-		if(entity != null){
-			String result = EntityUtils.toString(entity,"UTF-8");
-			jsonObject = JSONObject.fromObject(result);
-		}
-		return jsonObject;
-	}
 
-	/**
-	 * POST请求
-	 * @param url
-	 * @param outStr
-	 * @return
-	 * @throws ParseException
-	 * @throws IOException
-	 */
-	public static JSONObject doPostStr(String url,String outStr) throws ParseException, IOException{
-		DefaultHttpClient client = new DefaultHttpClient();
-		HttpPost httpost = new HttpPost(url);
-		JSONObject jsonObject = null;
-		httpost.setEntity(new StringEntity(outStr,"UTF-8"));
-		HttpResponse response = client.execute(httpost);
-		String result = EntityUtils.toString(response.getEntity(),"UTF-8");
-		jsonObject = JSONObject.fromObject(result);
-		return jsonObject;
-	}
+
 
 	/**
 	 * 文件上传
@@ -193,7 +157,7 @@ public class WeixinUtil {
 	public static AccessToken getAccessToken() throws Exception{
 		AccessToken token = new AccessToken();
 		String url = ACCESS_TOKEN_URL.replace("APPID", APPID).replace("APPSECRET", APPSECRET);
-		JSONObject jsonObject = doGetStr(url);
+		JSONObject jsonObject = AuthUtil.doGetStr(url);
 		System.out.println("jsonObject = "+JsonUtils.objectToJson(jsonObject));
 		if(jsonObject!=null){
 			if (!jsonObject.containsKey("errmsg")) {
@@ -248,11 +212,22 @@ public class WeixinUtil {
 	public static int createMenu(String token,String menu) throws ParseException, IOException{
 		int result = 0;
 		String url = CREATE_MENU_URL.replace("ACCESS_TOKEN", token);
-		JSONObject jsonObject = doPostStr(url, menu);
-		if(jsonObject != null){
-			result = jsonObject.getInt("errcode");
-		}
-		return result;
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = AuthUtil.doPost(url, menu);
+            if(jsonObject != null){
+                result = jsonObject.getInt("errcode");
+                return result;
+            } else {
+                return 1001;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 1001;
+        }
+
+
 	}
 //
 //	public static JSONObject queryMenu(String token) throws ParseException, IOException{
