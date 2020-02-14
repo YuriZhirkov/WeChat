@@ -42,8 +42,8 @@ public class WecharApplicationTests {
 				//String mediaId = WeixinUtil.upload(path, token.getToken(), "thumb");
 				//System.out.println(mediaId);
 				//创建菜单的测试
-				//String menu = JSONObject.fromObject(WeixinUtil.initMenu()).toString();
-				//int result = WeixinUtil.createMenu(token.getToken(),menu);
+				String menu = JSONObject.fromObject(WeixinUtil.initMenu()).toString();
+				int result = WeixinUtil.createMenu(token.getToken(),menu);
 				//if (result == 0){
 				//	System.out.println("创建菜单成功");
 				//} else {
