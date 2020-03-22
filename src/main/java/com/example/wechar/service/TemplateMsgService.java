@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import utils.AuthUtil;
 import utils.JsonUtils;
+import utils.PhoneCodeUtil;
 import utils.WeixinUtil;
 
 /**
@@ -123,11 +124,14 @@ public class TemplateMsgService {
                 if (jsonObject.containsKey("errmsg") && jsonObject.getString("errmsg").equals("ok")) {
                     return  "00-发送模板消息成功";
                 } else {
-                    if (jsonObject.containsKey("errmsg")) {
-                        return  "03-发送模板消息失败:"+jsonObject.getString("errmsg");
-                    } else {
-                        return  "03-发送模板消息失败";
-                    }
+//                    模板消息发送失败那就发送手机消息
+                    String s = PhoneCodeUtil.sendSmsRegisterTemplateId(556608, "15818735390", "");
+                    return s;
+//                    if (jsonObject.containsKey("errmsg")) {
+//                        return  "03-发送模板消息失败:"+jsonObject.getString("errmsg");
+//                    } else {
+//                        return  "03-发送模板消息失败";
+//                    }
 
                 }
             } else {

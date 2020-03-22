@@ -81,7 +81,7 @@ public class WecharApplicationTests {
 		messageTemplateSendInput.setValue2("2020年01月24日下午2点");
 		messageTemplateSendInput.setValue3("深圳龙华区上塘地跌站A出口");
 
-		messageTemplateSendInput.setValue4("涂欣");
+		messageTemplateSendInput.setValue4("哈哈哈");
 		messageTemplateSendInput.setOpenId("oDZ8O1CT18NISlqmtRTwXq89aJ8M");
 //		messageTemplateSendInput.setOpenId("oDZ8O1M9IRvoA4rV8gsGJvOzh1tU");
 		messageTemplateSendInput.setTemplate_id("0UvpP1wFp-gvLVGc8XxkxMn30TLjNueyiSlqftPiugU");
@@ -145,4 +145,13 @@ public class WecharApplicationTests {
 
     }
 
+	@Test
+	public void testUserId() {
+		String str = "A1179007829860712449";
+		String zim = str.substring(0,1);
+		System.out.println("zim="+zim);
+
+		String userId = str.substring(1,str.length());
+		System.out.println("userId="+userId);
+	}
 }
