@@ -14,6 +14,9 @@ import utils.AuthUtil;
 import utils.JsonUtils;
 import utils.WeixinUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class WecharApplicationTests {
@@ -87,7 +90,8 @@ public class WecharApplicationTests {
 		messageTemplateSendInput.setTemplate_id("0UvpP1wFp-gvLVGc8XxkxMn30TLjNueyiSlqftPiugU");
 
 		messageTemplateSendInput.setUrl("https://www.baidu.com");
-		String  messageTemplateSend= templateMsgService.messageTemplateSend(messageTemplateSendInput);
+		String[] param = new String[]{"照片不对"};
+		String  messageTemplateSend= templateMsgService.messageTemplateSend(messageTemplateSendInput,556610,"15818735390",param);
 
 		System.out.println("messageTemplateSend="+messageTemplateSend);
 
@@ -114,7 +118,7 @@ public class WecharApplicationTests {
         messageTemplateSendInput.setTemplate_id("9iIMCN9ZgufKDdmR_FaHiva2qud2LctUpEAS5rK8QhI");
 
         messageTemplateSendInput.setUrl("https://www.baidu.com");
-        String  messageTemplateSend= templateMsgService.messageTemplateSend(messageTemplateSendInput);
+        String  messageTemplateSend= templateMsgService.messageTemplateSend(messageTemplateSendInput,null,null,null);
         System.out.println("messageTemplateSend="+messageTemplateSend);
 
     }
@@ -140,7 +144,8 @@ public class WecharApplicationTests {
         messageTemplateSendInput.setTemplate_id("9iIMCN9ZgufKDdmR_FaHiva2qud2LctUpEAS5rK8QhI");
 
         messageTemplateSendInput.setUrl("https://www.baidu.com");
-        String  messageTemplateSend= templateMsgService.messageTemplateSend(messageTemplateSendInput);
+        String[] param = new String[]{};
+        String  messageTemplateSend= templateMsgService.messageTemplateSend(messageTemplateSendInput,556608,"15818735390",param);
         System.out.println("messageTemplateSend="+messageTemplateSend);
 
     }

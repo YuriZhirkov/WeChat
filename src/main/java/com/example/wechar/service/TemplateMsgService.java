@@ -9,6 +9,8 @@ import utils.JsonUtils;
 import utils.PhoneCodeUtil;
 import utils.WeixinUtil;
 
+import java.util.List;
+
 /**
  * @program: wechar
  * @description: 消息模板的服务
@@ -71,7 +73,7 @@ public class TemplateMsgService {
      * 2. http请求方式: POST https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN
      * 3. 0UvpP1wFp-gvLVGc8XxkxMn30TLjNueyiSlqftPiugU
      */
-    public String messageTemplateSend(MessageTemplateSendInput messageTemplateSendInput) {
+    public String messageTemplateSend(MessageTemplateSendInput messageTemplateSendInput, Integer templateId, String phone, String[] param ) {
         //0UvpP1wFp-gvLVGc8XxkxMn30TLjNueyiSlqftPiugU 	报名成功通知	OPENTM413887043
         //      活动咨询电话：15818735390
         TemplateMsgValueColor remark = new TemplateMsgValueColor(messageTemplateSendInput.getRemark(),messageTemplateSendInput.getColor());
@@ -125,14 +127,24 @@ public class TemplateMsgService {
                     return  "00-发送模板消息成功";
                 } else {
 //                    模板消息发送失败那就发送手机消息
-                    String s = PhoneCodeUtil.sendSmsRegisterTemplateId(556608, "15818735390", "");
-                    return s;
-//                    if (jsonObject.containsKey("errmsg")) {
-//                        return  "03-发送模板消息失败:"+jsonObject.getString("errmsg");
-//                    } else {
-//                        return  "03-发送模板消息失败";
-//                    }
 
+//                    String phone = "15818735390";
+                    if (!StringUtils.isEmpty(phone)) {
+//                        String[] param = new String[]{};
+//                        556608
+                        String s = PhoneCodeUtil.sendSmsRegisterTemplateId(templateId, phone, param);
+                        if (s.equals("OK")) {
+                            return  "00-发送手机消息成功";
+                        } else {
+                            return  "03-发送手机消息失败";
+                        }
+                    } else {
+                        if (jsonObject.containsKey("errmsg")) {
+                            return  "03-发送模板消息失败:"+jsonObject.getString("errmsg");
+                        } else {
+                            return  "03-发送模板消息失败";
+                        }
+                    }
                 }
             } else {
                 return  "03-发送模板消息失败";
